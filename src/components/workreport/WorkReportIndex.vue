@@ -5,14 +5,16 @@
       <!--<SideMenu></SideMenu>-->
     </el-aside>
     <el-main>
-      <!--<books></books>-->
+      <WorkReport class="books-area"></WorkReport>
     </el-main>
   </el-container>
 </template>
 
 <script>
+import WorkReport from './WorkReport'
 export default {
-  name: 'WorkReportIndex'
+  name: 'WorkReportIndex',
+  components: {WorkReport}
 }
 </script>
 

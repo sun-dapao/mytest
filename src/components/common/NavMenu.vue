@@ -23,7 +23,7 @@ export default {
     return {
       navList: [
         {name: '/index', navItem: '首页'},
-        {name: '/jotter', navItem: '笔记本'},
+        // {name: '/jotter', navItem: '笔记本'},
         {name: '/workreport', navItem: '周报'},
         {name: '/admin', navItem: '个人中心'}
       ]
