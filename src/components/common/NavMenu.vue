@@ -1,8 +1,7 @@
 <template>
   <el-menu
-    :default-active="'/index'"
-    router
-    mode="horizontal"
+    :default-active=routepath
+    router mode="horizontal"
     background-color="white"
     text-color="#222"
     active-text-color="red"
@@ -21,6 +20,7 @@ export default {
   name: 'NavMenu',
   data () {
     return {
+      routepath: this.$route.path,
       navList: [
         {name: '/index', navItem: '首页'},
         // {name: '/jotter', navItem: '笔记本'},
