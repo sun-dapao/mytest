@@ -7,19 +7,13 @@
       @close="clear">
       <el-form v-model="form" style="text-align: left" ref="dataForm">
         <el-form-item label="书名" :label-width="formLabelWidth" prop="title">
-          <el-input v-model="form.title" autocomplete="off" placeholder="不加《》"></el-input>
+          <el-input v-model="form.name" autocomplete="off" placeholder="不加《》"></el-input>
         </el-form-item>
         <el-form-item label="作者" :label-width="formLabelWidth" prop="author">
-          <el-input v-model="form.author" autocomplete="off"></el-input>
+          <el-input v-model="form.address" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="出版日期" :label-width="formLabelWidth" prop="date">
           <el-input v-model="form.date" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="出版社" :label-width="formLabelWidth" prop="press">
-          <el-input v-model="form.press" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="封面" :label-width="formLabelWidth" prop="cover">
-          <el-input v-model="form.cover" autocomplete="off" placeholder="图片 URL"></el-input>
         </el-form-item>
         <el-form-item label="简介" :label-width="formLabelWidth" prop="abs">
           <el-input type="textarea" v-model="form.abs" autocomplete="off"></el-input>
@@ -54,11 +48,9 @@ export default {
       dialogFormVisible: false,
       form: {
         id: '',
-        title: '',
-        author: '',
+        name: '',
+        address: '',
         date: '',
-        press: '',
-        cover: '',
         abs: '',
         category: {
           id: '',
@@ -72,24 +64,20 @@ export default {
     clear () {
       this.form = {
         id: '',
-        title: '',
-        author: '',
+        name: '',
+        address: '',
         date: '',
-        press: '',
-        cover: '',
         abs: '',
         category: ''
       }
     },
     onSubmit () {
       this.$axios
-        .post('/books', {
+        .post('workReport/queryList', {
           id: this.form.id,
-          cover: this.form.cover,
-          title: this.form.title,
-          author: this.form.author,
+          name: this.form.name,
+          address: this.form.address,
           date: this.form.date,
-          press: this.form.press,
           abs: this.form.abs,
           category: this.form.category
         }).then(resp => {

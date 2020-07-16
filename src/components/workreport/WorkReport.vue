@@ -19,8 +19,20 @@
       prop="address"
       label="地址">
     </el-table-column>
+    <el-table-column label="操作">
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          @click="handleEdit(scope.$index, scope.row)">修改
+        </el-button>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)">删除
+        </el-button>
+      </template>
+    </el-table-column>
   </el-table>
-    <edit-form @onSubmit="loadBooks()" ref="edit"></edit-form>
   <el-row>
     <el-pagination
       @current-change="handleCurrentChange"
@@ -28,6 +40,7 @@
       :page-size="pageSize"
       :total="tableData.length">
     </el-pagination>
+    <edit-form @onSubmit="getData()" ref="edit"></edit-form>
   </el-row>
   </div>
 </template>
@@ -89,7 +102,33 @@ export default {
     // 显示第几页
     handleCurrentChange (val) {
       // 改变默认的页数
-      this.currentPage = val
+      this.curPage = val
+    },
+    editBook (item) {
+      this.$refs.edit.dialogFormVisible = true
+      this.$refs.edit.form = {
+        id: item.id,
+        cover: item.cover,
+        title: item.title,
+        author: item.author,
+        date: item.date,
+        press: item.press,
+        abs: item.abs,
+        category: {
+          id: item.category.id.toString(),
+          name: item.category.name
+        }
+      }
+    },
+    searchResult () {
+      var _this = this
+      this.$axios
+        .get('/search?keywords=' + this.$refs.searchBar.keywords, {
+        }).then(resp => {
+          if (resp && resp.status === 200) {
+            _this.books = resp.data
+          }
+        })
     }
   },
   created: function () {
